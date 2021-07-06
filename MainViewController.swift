@@ -39,10 +39,7 @@ class MainViewController: UIViewController {
     }
     
     // MARK: Action
-    
-    func someAction() {
-        
-    }
+
 }
 
 // MARK: Setup
@@ -68,7 +65,11 @@ private extension MainViewController {
 extension MainViewController: MainDisplayLogic {
 	func addViewModelAt(_ viewModel: [DataModel]?) {
 		guard let model = viewModel else { return }
-		self.viewModel = model
+		if self.viewModel == nil {
+			self.viewModel = model
+		} else {
+			self.viewModel?.append(contentsOf: model)
+		}
 		tableView.reloadData()
 	}
 
@@ -85,8 +86,18 @@ extension MainViewController: UITableViewDelegate {
 		cell.backgroundColor = .clear
 		cell.selectionStyle = .none
 	}
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let position = scrollView.contentOffset.y
+		
+		if position > (tableView.contentSize.height - scrollView.frame.size.height) {
+			DispatchQueue.global(qos: .background).async {
+				self.presenter?.getViewModel()
+			}
+		}
+	}
 	
 }
+
 extension MainViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,6 +111,4 @@ extension MainViewController: UITableViewDataSource {
 		cell.configure(with: viewObjects[indexPath.row])
 		return cell
 	}
-	
-	
 }

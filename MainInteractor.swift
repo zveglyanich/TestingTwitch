@@ -23,14 +23,25 @@ protocol MainDataStore {
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
-
+	
+	///Текущая страница
+	private var page = 0
+	private let pageStep = 10
+	
 	var dataModel: [DataModel]?
 	
 	func downloadDataModel(completion: @escaping (Bool, [DataModel]?, Error?) -> ()) {
-		NetworkManager.shared.request(MainRequest.someMain) { [weak self] Result in
+		let downloadingPage = (page + 1) * pageStep
+		NetworkManager.shared.request(MainRequest.someMain(pageNumber: downloadingPage)) { [weak self] Result in
 			switch Result {
 			case .success(let data):
-				self?.dataModel = data
+				guard let dataModel = data else { return }
+				
+				if self?.dataModel == nil {
+					self?.dataModel = dataModel
+				} else {
+					self?.dataModel?.append(contentsOf: dataModel)
+				}
 				completion(true, self?.dataModel, nil)
 			case .failure(let error):
 				completion(false, nil, error)

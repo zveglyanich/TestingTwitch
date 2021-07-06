@@ -14,7 +14,7 @@ import Foundation
 import Alamofire
 
 enum MainRequest {
-    case someMain
+    case someMain(pageNumber: Int)
 }
 
 extension MainRequest: DefaultRequest {
@@ -43,8 +43,11 @@ extension MainRequest: DefaultRequest {
     
     var parameters: [String: Any]? {
         switch self {
-        case .someMain:
-            return nil
+        case .someMain(let page):
+            return [
+				"limit": "\(page)",
+				"offset": "0"
+			]
         }
     }
 }
@@ -64,6 +67,8 @@ extension DefaultRequest {
 		urlRequest.httpMethod = method.rawValue
 		urlRequest.allHTTPHeaderFields = headers
 		
+		let urlEncoding = URLEncoding(arrayEncoding: .noBrackets)
+		urlRequest = try urlEncoding.encode(urlRequest, with: parameters)
 		return urlRequest
 	}
 }

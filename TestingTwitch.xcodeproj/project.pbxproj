@@ -126,7 +126,6 @@
 		C108C89B2694285C00CEE9F0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				C108C8AC2694287400CEE9F0 /* API */,
 				C108C89D2694286E00CEE9F0 /* MainPresenter.swift */,
 				C108C89E2694286E00CEE9F0 /* MainWorker.swift */,
 				C108C8A02694286E00CEE9F0 /* MainRouter.swift */,
@@ -137,13 +136,6 @@
 				C108C8AF26942C7400CEE9F0 /* Cell */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		C108C8AC2694287400CEE9F0 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		C108C8AF26942C7400CEE9F0 /* Cell */ = {

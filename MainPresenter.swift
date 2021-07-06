@@ -12,35 +12,30 @@
 
 import UIKit
 
-protocol MainPresentationLogic: class {
-	
-}
-
 protocol MainViewControllerOutput {
 	func getViewModel()
-	
+	func openFeedBackViewController()
 }
 
-class MainPresenter: MainPresentationLogic {
+class MainPresenter {
 
-	
     var interactor: MainBusinessLogic?
     weak var viewController: MainDisplayLogic?
     var router: MainRoutingLogic?
     
-    // MARK: Presentation Logic
-    
-    func presentSomething() {
-    }
 }
 
 extension MainPresenter: MainViewControllerOutput {
+	func openFeedBackViewController() {
+		router?.routeTo(target: .feedback)
+	}
+	
 	func getViewModel() {
 		interactor?.downloadDataModel { [weak self] succsess, model, error in
 			if succsess {
 				self?.viewController?.addViewModelAt(model)
 			} else {
-				
+				print ("viewController.displayErrorAlert(message: message, errorCode: errorCode, error: error)")
 			}
 		}
 	}

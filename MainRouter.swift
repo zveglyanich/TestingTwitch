@@ -20,21 +20,19 @@ class MainRouter: MainRoutingLogic {
 
     private var navigationController: UINavigationController?
     init(withNavigationController: UINavigationController?) {
-        self.navigationController = withNavigationController
+        navigationController = withNavigationController
     }
 
     enum Targets {
-        case t1
-        // ...
+        case feedback
     }
 
     func routeTo(target: MainRouter.Targets) {
         switch target {
-        case .t1:
+        case .feedback:
             print(#function)
-            /*let someVC = SomeVC(nibName: someVC.kStoryboardID, bundle: nil)
-             SomeConfigurator().configure(viewController: someVC, navigationController: self.navigationController)
-            navigationController?.pushViewController(someVC, animated: true)*/
+			let feedBackVC = FeedbackViewController()
+            navigationController?.pushViewController(feedBackVC, animated: true)
         }
     }
 }

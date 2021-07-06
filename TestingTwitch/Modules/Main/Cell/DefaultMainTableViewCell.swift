@@ -27,8 +27,7 @@ class DefaultMainTableViewCell: UITableViewCell {
 	
 	private let iconImageView: UIImageView = {
 		let imageView = UIImageView()
-		imageView.backgroundColor = .blue
-		imageView
+		imageView.backgroundColor = .clear
 		return imageView
 	}()
 	

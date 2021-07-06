@@ -28,23 +28,21 @@ class MainViewController: UIViewController {
 		table.sectionFooterHeight = 0
 		return table
 	}()
-	
-    // MARK: View lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
 		setupConstraints()
-		
     }
-    
-    // MARK: Action
-
 }
 
-// MARK: Setup
 private extension MainViewController {
     func setup() {
+		
+		let feedBackBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star.square.fill"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openFeedBackViewController))
+		feedBackBarButtonItem.tintColor = .blue
+		navigationItem.setRightBarButtonItems([feedBackBarButtonItem], animated: true)
+		
 		view.backgroundColor = .white
 		view.addSubview(tableView)
 		setupCells()
@@ -59,6 +57,10 @@ private extension MainViewController {
 	}
 	func setupCells() {
 		tableView.register(DefaultMainTableViewCell.self, forCellReuseIdentifier: String(describing: DefaultMainTableViewCell.self))
+	}
+	
+	@objc private func openFeedBackViewController() {
+		presenter?.openFeedBackViewController()
 	}
 }
 

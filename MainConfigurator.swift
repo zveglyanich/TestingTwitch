@@ -27,7 +27,7 @@ final class MainConfigurator: BaseConfiguratorProtocol {
         let router = MainRouter(withNavigationController: navigationController)
 
         
-        interactor.presenter = presenter
+        //interactor.presenter = presenter
         viewController.presenter = presenter
         presenter.viewController = viewController
         presenter.interactor = interactor

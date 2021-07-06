@@ -19,15 +19,15 @@ protocol MainBusinessLogic {
 }
 
 protocol MainDataStore {
-	
 	var dataModel: [DataModel]? { get set }
+	var savedDataModel: Results<SaveData>? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
 	
-	///Текущая страница
-	private var page = 0
 	static let pageStep = 10
+
+	private var page = 0
 	
 	var dataModel: [DataModel]?
 	var savedDataModel = StorgeRealmManager.shared.realm?.objects(SaveData.self)
@@ -60,7 +60,7 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 		}
 	}
 	
-	weak var presenter: MainPresentationLogic!
+	
 	
 	private func updateValues(from dataModel: [DataModel]?) {
 		guard let data = dataModel else { return }

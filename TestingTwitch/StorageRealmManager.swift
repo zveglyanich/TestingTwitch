@@ -43,7 +43,6 @@ class StorgeRealmManager: Storageprotocol {
 		return self.realm
 	}
 	
-	
 	func saveData(_ data: [SaveData]) throws {
 		guard realm != nil else { throw RealmErrors.ErrorOfWriteInDataBase}
 		try realm!.write{

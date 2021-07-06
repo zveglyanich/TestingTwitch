@@ -11,5 +11,6 @@ pod 'Alamofire-SwiftyJSON'
 pod 'Kingfisher'
 pod 'RealmSwift'
 pod 'SnapKit', '~> 5.0.0'
+pod 'AARatingBar'
 
 end

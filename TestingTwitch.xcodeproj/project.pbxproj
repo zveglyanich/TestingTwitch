@@ -24,6 +24,7 @@
 		C108C8B62694386000CEE9F0 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B52694386000CEE9F0 /* DataModel.swift */; };
 		C108C8B826943B9200CEE9F0 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B726943B9200CEE9F0 /* GlobalConstants.swift */; };
 		C108C8BE26947FE400CEE9F0 /* StorageRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8BD26947FE400CEE9F0 /* StorageRealmManager.swift */; };
+		C13F5EC826949C990016BD0B /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13F5EC726949C990016BD0B /* FeedbackViewController.swift */; };
 		D40688D0529D011958A044A6 /* Pods_TestingTwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A710CF300E36D2EE5155CBD /* Pods_TestingTwitch.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		C108C8B52694386000CEE9F0 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C108C8B726943B9200CEE9F0 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		C108C8BD26947FE400CEE9F0 /* StorageRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRealmManager.swift; sourceTree = "<group>"; };
+		C13F5EC726949C990016BD0B /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		C108C8B026942C9C00CEE9F0 /* RouteTargets */ = {
 			isa = PBXGroup;
 			children = (
+				C13F5EC726949C990016BD0B /* FeedbackViewController.swift */,
 			);
 			path = RouteTargets;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				C108C8B62694386000CEE9F0 /* DataModel.swift in Sources */,
 				C108C8AA2694286E00CEE9F0 /* MainInteractor.swift in Sources */,
 				C108C8B4269436C700CEE9F0 /* NetworkAssistant.swift in Sources */,
+				C13F5EC826949C990016BD0B /* FeedbackViewController.swift in Sources */,
 				C108C8A62694286E00CEE9F0 /* MainWorker.swift in Sources */,
 				C108C8A52694286E00CEE9F0 /* MainPresenter.swift in Sources */,
 				C108C8A92694286E00CEE9F0 /* MainViewController.swift in Sources */,

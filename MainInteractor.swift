@@ -11,16 +11,34 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol MainBusinessLogic {
-    func doSomething()
+    func downloadDataModel(completion: @escaping (_ succsess: Bool, _ dataModel: [DataModel]?, _ error: Error?) -> ())
 }
 
 protocol MainDataStore {
-    //var name: String { get set }
+
+    var dataModel: [DataModel]? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
+
+	var dataModel: [DataModel]?
+	
+	func downloadDataModel(completion: @escaping (Bool, [DataModel]?, Error?) -> ()) {
+		NetworkManager.shared.request(MainRequest.someMain) { [weak self] Result in
+			switch Result {
+			case .success(let data):
+				self?.dataModel = data
+				completion(true, self?.dataModel, nil)
+			case .failure(let error):
+				completion(false, nil, error)
+			}
+		}
+	}
+	
+	
     weak var presenter: MainPresentationLogic!
     var worker: MainWorker?
     //var name: String = ""
@@ -31,6 +49,5 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
         worker = MainWorker()
         worker?.doSomeWork()
         
-        presenter.presentSomething()
     }
 }

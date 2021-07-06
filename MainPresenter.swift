@@ -13,27 +13,35 @@
 import UIKit
 
 protocol MainPresentationLogic: class {
-    func presentSomething()
+	
 }
 
 protocol MainViewControllerOutput {
-    func someActionTriggered()
+	func getViewModel()
+	
 }
 
 class MainPresenter: MainPresentationLogic {
-    var interactor: MainBusinessLogic!
-    weak var viewController: MainDisplayLogic!
-    var router: MainRoutingLogic!
+
+	
+    var interactor: MainBusinessLogic?
+    weak var viewController: MainDisplayLogic?
+    var router: MainRoutingLogic?
     
     // MARK: Presentation Logic
     
     func presentSomething() {
-        viewController.displaySomething()
     }
 }
 
 extension MainPresenter: MainViewControllerOutput {
-    func someActionTriggered() {
-        interactor.doSomething()
-    }
+	func getViewModel() {
+		interactor?.downloadDataModel { [weak self] succsess, model, error in
+			if succsess {
+				self?.viewController?.addViewModelAt(model)
+			} else {
+				
+			}
+		}
+	}
 }

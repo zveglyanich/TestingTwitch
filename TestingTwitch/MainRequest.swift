@@ -17,11 +17,11 @@ enum MainRequest {
     case someMain
 }
 
-extension MainRequest/*: DefaultRequest*/ {
+extension MainRequest: DefaultRequest {
     var path: String {
         switch self {
         case .someMain:
-            return "v1/REPLACE_WITH_PATH/"
+            return "/kraken/games/top"
         }
     }
     
@@ -33,10 +33,11 @@ extension MainRequest/*: DefaultRequest*/ {
     }
     
     var headers: HTTPHeaders {
-        let token = "token"//try! KeychainManager().getToken()
+		let clientID = GlobalConsts.ClientID
+		let accept = GlobalConsts.accept
         return [
-            "Authorization": "JWT \(token)",
-            "Content-Type": "application/json",
+			"Accept": "\(accept)",
+			"Client-ID": "\(clientID)"
         ]
     }
     
@@ -46,4 +47,23 @@ extension MainRequest/*: DefaultRequest*/ {
             return nil
         }
     }
+}
+
+
+protocol DefaultRequest: URLRequestConvertible {
+	var path: String { get }
+	var method: HTTPMethod { get }
+	var headers: HTTPHeaders { get }
+	var parameters: [String: Any]? { get }
+}
+
+extension DefaultRequest {
+	func asURLRequest() throws -> URLRequest {
+		let url = try GlobalConsts.baseURL.asURL()
+		var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+		urlRequest.httpMethod = method.rawValue
+		urlRequest.allHTTPHeaderFields = headers
+		
+		return urlRequest
+	}
 }

@@ -6,10 +6,24 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DefaultMainTableViewCell: UITableViewCell {
 	
 	static let height: CGFloat = 120
+	
+	var imputViewModel: DataModel? {
+		didSet {
+			guard let object = imputViewModel else { return }
+			nameGameLabel.text = object.name
+			countCanalsLabel.text = String(object.channels)
+			countSeesLabel.text = String(object.viewers)
+			
+			if let url = URL(string: object.image) {
+				iconImageView.kf.setImage(with: url)
+			}
+		}
+	}
 	
 	private let iconImageView: UIImageView = {
 		let imageView = UIImageView()
@@ -21,8 +35,7 @@ class DefaultMainTableViewCell: UITableViewCell {
 		let label = UILabel()
 		label.numberOfLines = 1
 		label.textAlignment = .left
-		label.font = UIFont.boldSystemFont(ofSize: 15)
-		label.backgroundColor = .red
+		label.font = UIFont.boldSystemFont(ofSize: 12)
 		return label
 	}()
 	
@@ -30,8 +43,7 @@ class DefaultMainTableViewCell: UITableViewCell {
 		let label = UILabel()
 		label.numberOfLines = 0
 		label.textAlignment = .left
-		label.font = UIFont.boldSystemFont(ofSize: 15)
-		label.backgroundColor = .black
+		label.font = UIFont.boldSystemFont(ofSize: 10)
 		return label
 	}()
 	
@@ -39,8 +51,7 @@ class DefaultMainTableViewCell: UITableViewCell {
 		let label = UILabel()
 		label.numberOfLines = 0
 		label.textAlignment = .left
-		label.backgroundColor = .black
-		label.font = UIFont.boldSystemFont(ofSize: 15)
+		label.font = UIFont.boldSystemFont(ofSize: 10)
 		return label
 	}()
 	
@@ -53,7 +64,10 @@ class DefaultMainTableViewCell: UITableViewCell {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-
+	
+	func configure(with object: DataModel) {
+		imputViewModel = object
+	}
 }
 
 private extension DefaultMainTableViewCell {
@@ -85,4 +99,6 @@ private extension DefaultMainTableViewCell {
 			make.trailing.equalToSuperview().inset(20)
 		})
 	}
+	
+
 }

@@ -11,7 +11,6 @@
 		C108C889269424EF00CEE9F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C888269424EF00CEE9F0 /* SceneDelegate.swift */; };
 		C108C890269424F000CEE9F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C108C88F269424F000CEE9F0 /* Assets.xcassets */; };
 		C108C893269424F000CEE9F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C108C891269424F000CEE9F0 /* LaunchScreen.storyboard */; };
-		C108C8A42694286E00CEE9F0 /* MainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C89C2694286E00CEE9F0 /* MainResponse.swift */; };
 		C108C8A52694286E00CEE9F0 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C89D2694286E00CEE9F0 /* MainPresenter.swift */; };
 		C108C8A62694286E00CEE9F0 /* MainWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C89E2694286E00CEE9F0 /* MainWorker.swift */; };
 		C108C8A72694286E00CEE9F0 /* MainRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C89F2694286E00CEE9F0 /* MainRequest.swift */; };
@@ -21,6 +20,9 @@
 		C108C8AB2694286E00CEE9F0 /* MainConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8A32694286E00CEE9F0 /* MainConfigurator.swift */; };
 		C108C8AE269428F400CEE9F0 /* RoutingAssitant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8AD269428F400CEE9F0 /* RoutingAssitant.swift */; };
 		C108C8B226942E8600CEE9F0 /* DefaultMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B126942E8600CEE9F0 /* DefaultMainTableViewCell.swift */; };
+		C108C8B4269436C700CEE9F0 /* NetworkAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B3269436C700CEE9F0 /* NetworkAssistant.swift */; };
+		C108C8B62694386000CEE9F0 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B52694386000CEE9F0 /* DataModel.swift */; };
+		C108C8B826943B9200CEE9F0 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108C8B726943B9200CEE9F0 /* GlobalConstants.swift */; };
 		D40688D0529D011958A044A6 /* Pods_TestingTwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A710CF300E36D2EE5155CBD /* Pods_TestingTwitch.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,16 +36,18 @@
 		C108C88F269424F000CEE9F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C108C892269424F000CEE9F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C108C894269424F000CEE9F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C108C89C2694286E00CEE9F0 /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainResponse.swift; path = TestingTwitch/Modules/Main/API/MainResponse.swift; sourceTree = SOURCE_ROOT; };
 		C108C89D2694286E00CEE9F0 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = SOURCE_ROOT; };
 		C108C89E2694286E00CEE9F0 /* MainWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorker.swift; sourceTree = SOURCE_ROOT; };
-		C108C89F2694286E00CEE9F0 /* MainRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainRequest.swift; path = TestingTwitch/Modules/Main/API/MainRequest.swift; sourceTree = SOURCE_ROOT; };
+		C108C89F2694286E00CEE9F0 /* MainRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainRequest.swift; path = TestingTwitch/MainRequest.swift; sourceTree = SOURCE_ROOT; };
 		C108C8A02694286E00CEE9F0 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = SOURCE_ROOT; };
 		C108C8A12694286E00CEE9F0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = SOURCE_ROOT; };
 		C108C8A22694286E00CEE9F0 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = SOURCE_ROOT; };
 		C108C8A32694286E00CEE9F0 /* MainConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConfigurator.swift; sourceTree = SOURCE_ROOT; };
 		C108C8AD269428F400CEE9F0 /* RoutingAssitant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingAssitant.swift; sourceTree = "<group>"; };
 		C108C8B126942E8600CEE9F0 /* DefaultMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMainTableViewCell.swift; sourceTree = "<group>"; };
+		C108C8B3269436C700CEE9F0 /* NetworkAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAssistant.swift; sourceTree = "<group>"; };
+		C108C8B52694386000CEE9F0 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		C108C8B726943B9200CEE9F0 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,10 @@
 				C108C886269424EF00CEE9F0 /* AppDelegate.swift */,
 				C108C888269424EF00CEE9F0 /* SceneDelegate.swift */,
 				C108C8AD269428F400CEE9F0 /* RoutingAssitant.swift */,
+				C108C8B3269436C700CEE9F0 /* NetworkAssistant.swift */,
+				C108C89F2694286E00CEE9F0 /* MainRequest.swift */,
+				C108C8B52694386000CEE9F0 /* DataModel.swift */,
+				C108C8B726943B9200CEE9F0 /* GlobalConstants.swift */,
 				C108C89A2694284E00CEE9F0 /* Modules */,
 				C108C88F269424F000CEE9F0 /* Assets.xcassets */,
 				C108C891269424F000CEE9F0 /* LaunchScreen.storyboard */,
@@ -134,8 +142,6 @@
 		C108C8AC2694287400CEE9F0 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				C108C89C2694286E00CEE9F0 /* MainResponse.swift */,
-				C108C89F2694286E00CEE9F0 /* MainRequest.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -273,9 +279,11 @@
 				C108C8B226942E8600CEE9F0 /* DefaultMainTableViewCell.swift in Sources */,
 				C108C889269424EF00CEE9F0 /* SceneDelegate.swift in Sources */,
 				C108C8A72694286E00CEE9F0 /* MainRequest.swift in Sources */,
-				C108C8A42694286E00CEE9F0 /* MainResponse.swift in Sources */,
 				C108C8AE269428F400CEE9F0 /* RoutingAssitant.swift in Sources */,
+				C108C8B826943B9200CEE9F0 /* GlobalConstants.swift in Sources */,
+				C108C8B62694386000CEE9F0 /* DataModel.swift in Sources */,
 				C108C8AA2694286E00CEE9F0 /* MainInteractor.swift in Sources */,
+				C108C8B4269436C700CEE9F0 /* NetworkAssistant.swift in Sources */,
 				C108C8A62694286E00CEE9F0 /* MainWorker.swift in Sources */,
 				C108C8A52694286E00CEE9F0 /* MainPresenter.swift in Sources */,
 				C108C8A92694286E00CEE9F0 /* MainViewController.swift in Sources */,

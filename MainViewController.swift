@@ -14,12 +14,13 @@ import UIKit
 import SnapKit
 
 protocol MainDisplayLogic: class {
-    func displaySomething()
+	func addViewModelAt(_ viewModel: [DataModel]?)
 }
 
 class MainViewController: UIViewController {
-    var presenter: MainViewControllerOutput!
-
+    var presenter: MainViewControllerOutput?
+	private var viewModel: [DataModel]?
+	
 	var tableView: UITableView = {
 		let table = UITableView()
 		table.separatorStyle = .none
@@ -34,12 +35,13 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setup()
 		setupConstraints()
+		
     }
     
     // MARK: Action
     
     func someAction() {
-        presenter.someActionTriggered()
+        
     }
 }
 
@@ -49,6 +51,7 @@ private extension MainViewController {
 		view.backgroundColor = .white
 		view.addSubview(tableView)
 		setupCells()
+		presenter?.getViewModel()
 		tableView.delegate = self
 		tableView.dataSource = self
     }
@@ -63,17 +66,19 @@ private extension MainViewController {
 }
 
 extension MainViewController: MainDisplayLogic {
-    func displaySomething() {
-    }
+	func addViewModelAt(_ viewModel: [DataModel]?) {
+		guard let model = viewModel else { return }
+		self.viewModel = model
+		tableView.reloadData()
+	}
+
 }
 
 extension MainViewController: UITableViewDelegate {
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		//presenter?.routeToObject(by: indexPath)
-	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return DefaultMainTableViewCell.height//indexPath.row >= viewModel!.count ? MyAdsLoadingTableViewCell.height : MyAdsTableViewCell.height
+		guard viewModel != nil else { return 0 }
+		return indexPath.row >= viewModel!.count  ? DefaultMainTableViewCell.height : DefaultMainTableViewCell.height
 	}
 	
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -85,11 +90,14 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		guard let section = viewModel?.count else { return 0 }
+		return section
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let viewObjects = viewModel else { return UITableViewCell() }
 		let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DefaultMainTableViewCell.self), for: indexPath) as! DefaultMainTableViewCell
+		cell.configure(with: viewObjects[indexPath.row])
 		return cell
 	}
 	

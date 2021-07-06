@@ -12,26 +12,33 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 protocol MainBusinessLogic {
-    func downloadDataModel(completion: @escaping (_ succsess: Bool, _ dataModel: [DataModel]?, _ error: Error?) -> ())
+	func downloadDataModel(completion: @escaping (_ succsess: Bool, _ dataModel: [DataModel]?, _ error: Error?) -> ())
 }
 
 protocol MainDataStore {
-
-    var dataModel: [DataModel]? { get set }
+	
+	var dataModel: [DataModel]? { get set }
 }
 
 class MainInteractor: MainBusinessLogic, MainDataStore {
 	
 	///Текущая страница
 	private var page = 0
-	private let pageStep = 10
+	static let pageStep = 10
 	
 	var dataModel: [DataModel]?
+	var savedDataModel = StorgeRealmManager.shared.realm?.objects(SaveData.self)
 	
 	func downloadDataModel(completion: @escaping (Bool, [DataModel]?, Error?) -> ()) {
-		let downloadingPage = (page + 1) * pageStep
+		
+		guard savedDataModel == nil || page > 0 else {
+			page += 1
+			return completion(true, convertDataModelFromSavedData(from: savedDataModel), nil)
+		}
+		let downloadingPage = (page + 1) * MainInteractor.pageStep
 		NetworkManager.shared.request(MainRequest.someMain(pageNumber: downloadingPage)) { [weak self] Result in
 			switch Result {
 			case .success(let data):
@@ -42,23 +49,45 @@ class MainInteractor: MainBusinessLogic, MainDataStore {
 				} else {
 					self?.dataModel?.append(contentsOf: dataModel)
 				}
+				self?.page = downloadingPage / MainInteractor.pageStep
 				completion(true, self?.dataModel, nil)
 			case .failure(let error):
 				completion(false, nil, error)
 			}
 		}
+		DispatchQueue.global(qos: .utility).async {
+			self.updateValues(from: self.dataModel)
+		}
 	}
 	
+	weak var presenter: MainPresentationLogic!
 	
-    weak var presenter: MainPresentationLogic!
-    var worker: MainWorker?
-    //var name: String = ""
-    
-    // MARK: Do something
-    
-    func doSomething() {
-        worker = MainWorker()
-        worker?.doSomeWork()
-        
-    }
+	private func updateValues(from dataModel: [DataModel]?) {
+		guard let data = dataModel else { return }
+		let saveArrayData: [SaveData] = data.compactMap { element in
+			let saveElement = SaveData(value: [element.image,
+											   element.name,
+											   element.channels,
+											   element.viewers])
+			return saveElement
+		}
+		do {
+			try StorgeRealmManager.shared.saveData(saveArrayData)
+		} catch let error {
+			print (error)
+		}
+	}
+
+	private func convertDataModelFromSavedData(from dataModel: Results<SaveData>?) -> [DataModel]? {
+		guard let data = dataModel else { return nil}
+		let convertDataModel: [DataModel]? = data.compactMap { element in
+			let convertedElement = DataModel.init(image: element.image,
+												  name: element.name,
+												  channels: element.channels,
+												  viewers: element.viewers)
+			return convertedElement
+		}
+		return convertDataModel
+	}
 }
+

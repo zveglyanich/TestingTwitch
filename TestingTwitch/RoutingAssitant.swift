@@ -8,16 +8,9 @@
 import Foundation
 import UIKit
 
-/// Протокол для начальной инициализации приложения
+
 protocol RoutingAssistantProtocol {
-	/// Установка начального UINavigationController
-	/// - Parameter navigationController: начальный UINavigationController
 	func setRootNavigationController(_ navigationController: UINavigationController)
-	
-	/// Создание начального UIViewController
-	/// - Parameters:
-	///	  - completion: результат
-	///   - startViewController: начальный UIViewController
 	func constructStartViewController(completion: @escaping (_ startViewController: UIViewController?) -> ())
 }
 
@@ -29,15 +22,9 @@ private protocol ModuleConstructorProtocol {
 	func construct(view: UIViewController, with configurator: BaseConfiguratorProtocol, navigationViewController: UINavigationController?) -> UIViewController
 }
 
-/// Протокол базовой конфигурации сцены
-protocol BaseConfiguratorProtocol {
 
-	/// Метод конфигурации сцены
-	/// - Parameters:
-	///   - viewController: объект-viewController
-	///   - navigationController: объект-navigationcontroller, в котором лежит vc
-	func configure(viewController: UIViewController,
-				   navigationController: UINavigationController?)
+protocol BaseConfiguratorProtocol {
+	func configure(viewController: UIViewController, navigationController: UINavigationController?)
 }
 
 
@@ -65,16 +52,12 @@ extension RoutingAssistant: RoutingAssistantProtocol {
 }
 
 extension RoutingAssistant: ModuleMakerProtocol {
-	
 	func constructMainContainer() -> UIViewController? {
 		return construct(view: MainViewController(), with: MainConfigurator(), navigationViewController: rootNavigationController)
 	}
-	
-	
 }
 
 extension RoutingAssistant: ModuleConstructorProtocol {
-	// Constructor
 	func construct(view: UIViewController, with configurator: BaseConfiguratorProtocol, navigationViewController: UINavigationController?) -> UIViewController {
 		configurator.`configure`(viewController: view, navigationController: navigationViewController)
 		return view

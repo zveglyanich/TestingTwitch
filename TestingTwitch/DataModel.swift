@@ -22,6 +22,14 @@ struct DataModel: Decodable {
 		self.channels = json["channels"].intValue
 		self.viewers = json["viewers"].intValue
 	}
+	
+	init(image: String, name: String, channels: Int, viewers: Int) {
+		self.image = image
+		self.name = name
+		self.channels = channels
+		self.viewers = viewers
+	}
+	
 	static func getArray(from jsonArray: JSON) -> [DataModel]? {
 		guard let jsonArray = jsonArray["top"].array else { return nil}
 		return jsonArray.compactMap { DataModel(of: $0) }
